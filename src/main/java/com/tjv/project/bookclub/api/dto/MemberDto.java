@@ -1,46 +1,37 @@
-package com.tjv.project.bookclub.domain;
+package com.tjv.project.bookclub.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
-@Entity
-public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MemberDto {
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
-
-    @Column
     private String firstName;
-
-    @Column
     private String lastName;
-
-
-    @Column
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime joinDate;
-
-    @Column
     private Long balance;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Collection<Long> borrowings;
 
-    @OneToMany
-    private Collection<Borrowing> borrowings;
-
-    public Member(Long id, String firstName, String lastName, Long balance) {
+    public MemberDto(Long id, String firstName, String lastName, LocalDateTime joinDate,
+                     Long balance, Collection<Long> borrowings) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.joinDate = joinDate;
         this.balance = balance;
+        this.borrowings = borrowings;
     }
 
-    public Member() {
-
-    }
-
-    public Member(Long id) {
-        this.id = id;
+    public MemberDto() {
     }
 
 
@@ -68,7 +59,6 @@ public class Member {
         this.lastName = lastName;
     }
 
-
     public LocalDateTime getJoinDate() {
         return joinDate;
     }
@@ -85,15 +75,11 @@ public class Member {
         this.balance = balance;
     }
 
-    public Collection<Borrowing> getBorrowings() {
+    public Collection<Long> getBorrowings() {
         return borrowings;
     }
 
-    public void setBorrowings(Collection<Borrowing> borrowings) {
+    public void setBorrowings(Collection<Long> borrowings) {
         this.borrowings = borrowings;
-    }
-
-    public void setBorrowings(Borrowing borrowing) {
-        this.borrowings.add(borrowing);
     }
 }

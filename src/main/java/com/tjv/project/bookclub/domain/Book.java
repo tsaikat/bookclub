@@ -1,5 +1,7 @@
 package com.tjv.project.bookclub.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -20,6 +22,21 @@ public class Book {
 
     @ManyToMany
     private Collection<Borrowing> borrowingHistory;
+
+    public Book(Long bookId, String bookTitle, String author, String genre) {
+        this.bookId = bookId;
+        this.bookTitle = bookTitle;
+        this.author = author;
+        this.genre = genre;
+    }
+
+    public Book() {
+
+    }
+
+    public Book(Long id) {
+        this.bookId = id;
+    }
 
     public Long getBookId() {
         return bookId;
@@ -57,7 +74,14 @@ public class Book {
         return borrowingHistory;
     }
 
+
     public void setBorrowingHistory(Collection<Borrowing> borrowingHistory) {
+
         this.borrowingHistory = borrowingHistory;
+    }
+
+    public void setBorrowingHistory(Borrowing borrowingHistory) {
+
+        this.borrowingHistory.add(borrowingHistory);
     }
 }

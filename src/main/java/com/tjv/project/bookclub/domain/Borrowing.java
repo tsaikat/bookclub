@@ -1,23 +1,19 @@
 package com.tjv.project.bookclub.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
-@Entity
+
 //@JsonIdentityInfo(
 //        property = "borrowingId",
 //        generator = ObjectIdGenerators.PropertyGenerator.class
 //)
-
+@Entity
 public class Borrowing {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long borrowingId;
 
     @Column
@@ -27,13 +23,28 @@ public class Borrowing {
     private LocalDateTime returnDate;
 
     @Column
-    private long cost;
+    private Long cost;
 
     @ManyToMany
     private Collection<Book> borrowedBooks;
 
     @ManyToOne
     private Member borrower;
+
+    public Borrowing(Long borrowingId, Long cost) {
+        this.borrowingId = borrowingId;
+        this.cost = cost;
+    }
+
+    public Borrowing() {
+
+    }
+
+    public Borrowing(List<Book> bookList, Member borrower, Long cost) {
+        this.borrowedBooks = bookList;
+        this.borrower = borrower;
+        this.cost = cost;
+    }
 
     public Long getBorrowingId() {
         return borrowingId;
@@ -59,11 +70,11 @@ public class Borrowing {
         this.returnDate = returnDate;
     }
 
-    public long getCost() {
+    public Long getCost() {
         return cost;
     }
 
-    public void setCost(long cost) {
+    public void setCost(Long cost) {
         this.cost = cost;
     }
 
@@ -74,6 +85,7 @@ public class Borrowing {
     public void setBorrowedBooks(Collection<Book> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
+
 
     public Member getBorrower() {
         return borrower;
