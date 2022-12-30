@@ -2,19 +2,12 @@ package com.tjv.project.bookclub.service;
 
 
 import com.tjv.project.bookclub.dao.BorrowingRepository;
-import com.tjv.project.bookclub.domain.Book;
 import com.tjv.project.bookclub.domain.Borrowing;
-import com.tjv.project.bookclub.domain.Member;
 import com.tjv.project.bookclub.exception.IllegalDataException;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class BorrowingService extends CrudService<Borrowing, Long>{
@@ -67,7 +60,10 @@ public class BorrowingService extends CrudService<Borrowing, Long>{
         // can only update return date
 
         var borrowingToUpdate = repository.findById(id).orElseThrow();
-        borrowingToUpdate.setReturnDate(LocalDateTime.now());
-        return repository.save(borrowingToUpdate);
+        if (borrowingToUpdate.getReturnDate() == null) {
+            borrowingToUpdate.setReturnDate(LocalDateTime.now());
+            return repository.save(borrowingToUpdate);
+        }
+        return borrowingToUpdate;
     }
 }
