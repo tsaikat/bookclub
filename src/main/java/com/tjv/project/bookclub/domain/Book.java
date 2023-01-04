@@ -21,6 +21,11 @@ public class Book {
     private String genre;
 
     @ManyToMany
+    @JoinTable(
+            name = "borrowing_book",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "borrowing_id")
+    )
     private Collection<Borrowing> borrowingHistory;
 
     public Book(Long bookId, String bookTitle, String author, String genre) {

@@ -25,7 +25,7 @@ public class Member {
     @Column
     private Long balance;
 
-    @OneToMany
+    @OneToMany(mappedBy = "borrower")
     private Collection<Borrowing> borrowings;
 
     public Member(Long id, String firstName, String lastName, Long balance) {

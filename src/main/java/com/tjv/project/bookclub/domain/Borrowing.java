@@ -25,7 +25,7 @@ public class Borrowing {
     @Column
     private Long cost;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "borrowingHistory")
     private Collection<Book> borrowedBooks;
 
     @ManyToOne
