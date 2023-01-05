@@ -1,6 +1,9 @@
 package com.tjv.project.bookclub.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.Collection;

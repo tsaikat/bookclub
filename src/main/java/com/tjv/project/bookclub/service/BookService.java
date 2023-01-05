@@ -3,10 +3,11 @@ package com.tjv.project.bookclub.service;
 import com.tjv.project.bookclub.dao.BookRepository;
 import com.tjv.project.bookclub.domain.Book;
 import com.tjv.project.bookclub.exception.IllegalDataException;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class BookService extends CrudService<Book, Long>{
@@ -43,6 +44,10 @@ public class BookService extends CrudService<Book, Long>{
         bookToUpdate.setAuthor(e.getAuthor());
         bookToUpdate.setGenre(e.getGenre());
         return repository.save(bookToUpdate);
+    }
+
+    public Collection<Book> findByAuthor (String author) {
+        return ((BookRepository) repository).findByAuthor(author);
     }
 
 }

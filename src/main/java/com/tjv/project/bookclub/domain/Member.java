@@ -25,7 +25,7 @@ public class Member {
     @Column
     private Long balance;
 
-    @OneToMany(mappedBy = "borrower")
+    @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL)
     private Collection<Borrowing> borrowings;
 
     public Member(Long id, String firstName, String lastName, Long balance) {
