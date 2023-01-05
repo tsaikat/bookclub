@@ -48,7 +48,7 @@ public class BorrowingService extends CrudService<Borrowing, Long>{
         }
 
         e.setBorrowDate(LocalDateTime.now());
-        e.getBorrowedBooks().forEach(book -> book.setBorrowingHistory(e));
+//        e.getBorrowedBooks().forEach(book -> book.setBorrowingHistory(e));
 //        e.getBorrower().setBorrowings(e);
         return repository.save(e);
     }
@@ -66,4 +66,5 @@ public class BorrowingService extends CrudService<Borrowing, Long>{
         }
         return borrowingToUpdate;
     }
+
 }

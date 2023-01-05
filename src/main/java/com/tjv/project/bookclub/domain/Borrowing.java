@@ -28,7 +28,12 @@ public class Borrowing {
     @Column
     private Long cost;
 
-    @ManyToMany(mappedBy = "borrowingHistory")
+    @ManyToMany (cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST} )
+    @JoinTable(
+            name = "borrowing_book",
+            joinColumns = @JoinColumn(name = "borrowing_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
     private Collection<Book> borrowedBooks;
 
     @ManyToOne

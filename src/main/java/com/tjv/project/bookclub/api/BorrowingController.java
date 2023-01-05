@@ -5,8 +5,9 @@ import com.tjv.project.bookclub.api.dto.converter.BorrowingDtoToEntityConverter;
 import com.tjv.project.bookclub.api.dto.converter.BorrowingToDtoConverter;
 import com.tjv.project.bookclub.domain.Borrowing;
 import com.tjv.project.bookclub.service.BorrowingService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/borrowings")
@@ -16,4 +17,9 @@ public class BorrowingController extends CrudRestController<Borrowing, Borrowing
                                BorrowingDtoToEntityConverter toEntityConverter) {
         super(service, toDtoConverter, toEntityConverter);
     }
+
+//    @Override
+//    @DeleteMapping("/{id}")
+//    @Query("DELETE FROM Borrowing b JOIN b.books book WHERE b.id = :borrowingId")
+//    public void delete((@Param("borrowingId")) @PathVariableLong id);
 }
