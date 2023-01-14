@@ -2,6 +2,13 @@
 
 A simple web application to manage a bookclub. Where memebers can borrow books. Each book borrowed will reduce their balance point. Borrowing will not be possible when there's no sufficient balance in memeber's account.
 
+# How to run?
+- Simply run the following command 
+```bash
+docker-compose up
+```
+
+
 ## Database Conceptual Model
 ![Database Conceptual Model](/database_schema.png)
 
