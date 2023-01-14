@@ -14,7 +14,12 @@ public class BookclubApplication {
     }
     @Bean
     SecurityFilterChain securityConfig(HttpSecurity security) throws Exception {
-        security.cors()
+        security.authorizeRequests().antMatchers("/swagger-ui/index.html",
+                        "/swagger-ui/**", "/swagger-resources/**", "/swagger-resources",
+                        "/api-docs/**", "/proxy/**", "/v3/api-docs/**")
+                .permitAll()
+                .and()
+                .cors()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**")

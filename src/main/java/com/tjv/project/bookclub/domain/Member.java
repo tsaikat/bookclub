@@ -96,4 +96,6 @@ public class Member {
     public void setBorrowings(Borrowing borrowing) {
         this.borrowings.add(borrowing);
     }
+
+    public String getFullName () { return (firstName + " " + lastName); }
 }

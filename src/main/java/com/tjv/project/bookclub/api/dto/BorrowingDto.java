@@ -16,14 +16,24 @@ public class BorrowingDto {
 
     private Collection<Long> borrowedBooks;
     private Long borrower;
+    private String borrowerName;
 
-    public BorrowingDto(Long borrowingId, LocalDateTime borrowDate, LocalDateTime returnDate, Long cost, Collection<Long> borrowedBooks, Long borrower) {
+    public String getBorrowerName() {
+        return borrowerName;
+    }
+
+    public void setBorrowerName(String borrowerName) {
+        this.borrowerName = borrowerName;
+    }
+
+    public BorrowingDto(Long borrowingId, LocalDateTime borrowDate, LocalDateTime returnDate, Long cost, Collection<Long> borrowedBooks, Long borrower, String borrowerName) {
         this.borrowingId = borrowingId;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
         Cost = cost;
         this.borrowedBooks = borrowedBooks;
         this.borrower = borrower;
+        this.borrowerName = borrowerName;
     }
 
     public Long getBorrowingId() {

@@ -15,11 +15,11 @@ public class BorrowingToDtoConverter implements Function<Borrowing, BorrowingDto
     public BorrowingDto apply(Borrowing borrowing) {
         if ( borrowing.getBorrowedBooks() == null || borrowing.getBorrower() == null ) {
             return new BorrowingDto(borrowing.getBorrowingId(), borrowing.getBorrowDate(), borrowing.getReturnDate(),
-                    borrowing.getCost(), null, null);
+                    borrowing.getCost(), null, null, null);
         }
 
         return new BorrowingDto(borrowing.getBorrowingId(), borrowing.getBorrowDate(), borrowing.getReturnDate(),
                 borrowing.getCost(), borrowing.getBorrowedBooks().stream().map(Book::getBookId).toList(),
-                borrowing.getBorrower().getId());
+                borrowing.getBorrower().getId(), borrowing.getBorrower().getFullName());
     }
 }
