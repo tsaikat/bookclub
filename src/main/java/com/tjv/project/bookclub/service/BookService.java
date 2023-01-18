@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,7 @@ public class BookService extends CrudService<Book, Long>{
     @Override
     public Book update (Long id, Book e) {
         Book bookToUpdate;
+        if (!Objects.equals(e.getBookId(), id)) throw new IllegalDataException();
         try {
             bookToUpdate = repository.findById(id).orElseThrow();
         } catch (IllegalArgumentException | NoSuchElementException ex) {
