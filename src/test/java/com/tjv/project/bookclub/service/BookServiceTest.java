@@ -56,5 +56,6 @@ class BookServiceTest {
         assertThrows(IllegalDataException.class, () -> service.update(idNotExist, inputBookValid));
         assertThrows(IllegalDataException.class, () -> service.update(idExist, inputBookInvalid));
 
+        Mockito.verify(repository, Mockito.never()).save(bookInDB);
     }
 }
