@@ -35,6 +35,14 @@ public class BookDto {
         this.borrowingHistory = borrowingHistory;
     }
 
+    public BookDto(Long bookId, String bookTitle, String author, String genre) {
+        this.bookId = bookId;
+        this.bookTitle = bookTitle;
+        this.author = author;
+        this.genre = genre;
+    }
+
+
     public Long getBookId() {
         return bookId;
     }
