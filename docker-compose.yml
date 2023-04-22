@@ -6,9 +6,10 @@ services:
     depends_on:
       - postgres
     environment:
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql://mydatabase:5432/postgres"
-      - "SPRING_DATASOURCE_USERNAME=postgres"
-      - "SPRING_DATASOURCE_PASSWORD=password"
+      - "DB_URL=jdbc:postgresql://postgres:5432/mydatabase"
+      - "DB_NAME=postgres"
+      - "DB_PASSWORD=password"
+      - "SPRING_JPA_HIBERNATE_DDL_AUTO=create"
   postgres:
     image: postgres:alpine
     container_name: bookclub_db
