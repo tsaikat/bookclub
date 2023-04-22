@@ -6,11 +6,15 @@ services:
     depends_on:
       - postgres
     environment:
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql://bookclub_db/postgres"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://mydatabase:5432/postgres"
       - "SPRING_DATASOURCE_USERNAME=postgres"
-      - "SPRING_DATASOURCE_PASSWORD=tjvbookclub"
+      - "SPRING_DATASOURCE_PASSWORD=password"
   postgres:
     image: postgres:alpine
     container_name: bookclub_db
+    ports:
+      - 5432:5432
     environment:
-      - "POSTGRES_PASSWORD=tjvbookclub"
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mydatabase
