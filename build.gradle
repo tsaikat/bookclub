@@ -19,15 +19,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.12'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.12'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    compileOnly 'org.projectlombok:lombok'
-    implementation 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'com.h2database:h2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:2.7.7'
+    implementation 'org.postgresql:postgresql:42.5.4'
+    testRuntimeOnly 'com.h2database:h2:2.1.214'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.1'
 }
 
 tasks.named('test') {
