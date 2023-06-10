@@ -1,21 +1,25 @@
 services:
   backend:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
       - 8080:8080
     depends_on:
-      - postgres
+      - db
+    container_name: bookclub_backend
     environment:
-      - "DB_URL=jdbc:postgresql://postgres:5432/mydatabase"
-      - "DB_NAME=postgres"
-      - "DB_PASSWORD=password"
-      - "SPRING_JPA_HIBERNATE_DDL_AUTO=create"
-  postgres:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mydb
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+  db:
     image: postgres:alpine
     container_name: bookclub_db
     ports:
-      - 5432:5432
+      - 5432
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_DB=mydb
+      - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=mydatabase
