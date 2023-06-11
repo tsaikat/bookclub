@@ -10,8 +10,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.function.Function;
 import java.util.stream.StreamSupport;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST,
-        RequestMethod.PUT, RequestMethod.DELETE}, maxAge = 3600)
+//@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST,
+//        RequestMethod.PUT, RequestMethod.DELETE}, maxAge = 3600)
 public abstract class CrudRestController <T, D, ID> {
 
     protected CrudService<T, ID> service;

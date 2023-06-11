@@ -14,6 +14,9 @@ services:
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_JPA_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - CORS_ALLOWED_ORIGIN=http://localhost:2000,http://localhost:3000
+      - CORS_ALLOWED_HEADERS=*
+      - CORS_ALLOWED_METHODS=*
   db:
     image: postgres:alpine
     container_name: bookclub_db
