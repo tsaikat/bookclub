@@ -1,0 +1,26 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - feature-ci
+  pull_request:
+    branches:
+      - feature-ci
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: gradle:7.3.3-jdk17
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build with Gradle
+        run: gradle build -x test
+
+      - name: Run tests
+        run: gradle test
