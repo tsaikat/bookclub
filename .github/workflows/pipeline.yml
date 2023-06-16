@@ -46,3 +46,4 @@ jobs:
           echo "SPRING_JPA_HIBERNATE_DDL_AUTO=${{ vars.SPRING_JPA_HIBERNATE_DDL_AUTO }}" >> env.properties
 
       - name: Run tests
+        run: gradle test
