@@ -3,24 +3,24 @@ package com.tjv.project.bookclub.service;
 import com.tjv.project.bookclub.dao.BookRepository;
 import com.tjv.project.bookclub.domain.Book;
 import com.tjv.project.bookclub.exception.IllegalDataException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest
+
 class BookServiceTest {
-    @Autowired
-    private BookService service;
-    @MockBean
+
+    @Mock
     private BookRepository repository;
+
+    @InjectMocks
+    private BookService service;
 
     Long idExist = 1L;
     Long idNotExist = 2L;
@@ -31,7 +31,8 @@ class BookServiceTest {
 
     @BeforeEach
     void setUp() {
-        // mock for isolating the method
+        MockitoAnnotations.openMocks(this);
+
         Mockito.when(repository.findById(inputBookValid.getBookId())).thenReturn(Optional.of(bookInDB));
         Mockito.when(repository.save(bookInDB)).thenReturn(inputBookValid);
     }
