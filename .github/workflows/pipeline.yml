@@ -1,0 +1,48 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: gradle:7.3.3-jdk17
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build with Gradle
+        run: gradle build -x test
+  Test:
+    needs: Build
+    runs-on: ubuntu-latest
+
+    container:
+      image: gradle:7.3.3-jdk17
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up env.properties file
+        run: |
+          echo "SERVER_PORT=${{ vars.SERVER_PORT }}" >> env.properties
+          echo "SERVER_CONTEXT_PATH=${{ vars.SERVER_CONTEXT_PATH }}" >> env.properties
+          echo "SPRING_OAUTH2_JWT_ISSUER_URI=${{ vars.SPRING_OAUTH2_JWT_ISSUER_URI }}" >> env.properties
+          echo "SPRING_OAUTH2_JWT_AUTH_URI=${{ vars.SPRING_OAUTH2_JWT_AUTH_URI }}" >> env.properties
+          echo "CORS_ALLOWED_ORIGIN=${{ vars.CORS_ALLOWED_ORIGIN }}" >> env.properties
+          echo "CORS_ALLOWED_METHODS=${{ vars.CORS_ALLOWED_METHODS }}" >> env.properties
+          echo "CORS_ALLOWED_HEADERS=${{ vars.CORS_ALLOWED_HEADERS }}" >> env.properties
+          echo "CORS_SET_MAXAGE=${{ vars.CORS_SET_MAXAGE }}" >> env.properties
+          echo "SPRING_JPA_HIBERNATE_DIALECT=${{ vars.SPRING_JPA_HIBERNATE_DIALECT }}" >> env.properties
+          echo "SPRING_JPA_HIBERNATE_DDL_AUTO=${{ vars.SPRING_JPA_HIBERNATE_DDL_AUTO }}" >> env.properties
+
+      - name: Run tests
